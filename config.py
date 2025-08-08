@@ -4,8 +4,17 @@ Configuration file for the Telegram bot
 import os
 import logging
 
-# Bot configuration
-BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "your_bot_token_here")
+# ======================
+# Bot Configuration
+# ======================
+BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
+WEBAPP_HOST = "0.0.0.0"  # Required for Render.com
+WEBAPP_PORT = int(os.getenv("PORT", 5000))  # Render provides PORT environment variable
+
+# Webhook Configuration
+WEBHOOK_URL = os.getenv("WEBHOOK_URL", "")  # Set this in Render.com environment variables
+WEBHOOK_PATH = f"/templates/index.html/{BOT_TOKEN}"  # Unique path for your webhook
+WEBHOOK_URL_FULL = f"{WEBHOOK_URL}{WEBHOOK_PATH}" if WEBHOOK_URL else ""
 
 # Logging configuration
 logging.basicConfig(

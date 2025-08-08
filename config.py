@@ -47,3 +47,18 @@ DEAL_TYPES = [
     'Percentage Discounts', 'BOGO Offers', 'Bank Discounts', 
     'Clearance Sales', 'Cashback Offers'
 ]
+# ======================
+# Deployment Checks
+# ======================
+def check_config():
+    """Validate essential configuration"""
+    if not BOT_TOKEN:
+        logger.error("TELEGRAM_BOT_TOKEN not set!")
+        raise ValueError("Telegram bot token is required")
+    
+    if WEBHOOK_URL and not WEBHOOK_URL.startswith(('http://', 'https://')):
+        logger.error("Invalid WEBHOOK_URL format")
+        raise ValueError("WEBHOOK_URL must start with http:// or https://")
+
+# Validate on import
+check_config()
